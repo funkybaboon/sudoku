@@ -1,21 +1,30 @@
 <!DOCTYPE HTML>
 <html>
-<head>
-	<script>
-		function myFunction()
-		{
-			alert('Hello World!');
-		}
-	</script>
-</head>
-<body>
+	<head>
+		<script>
+			var urlParams;
 
-	<p>
-		<button onclick="myFunction()">Create a Dialog Box!</button>
-	</p>
-	<p>
-		<button onclick="myFunction()">Create Another Dialog Box!</button>
-	</p>
+			window.onpopstate = function () {
+				var match;
+	        	var pl     = /\+/g;  // Regex for replacing addition symbol with a space
+	        	var search = /([^&=]+)=?([^&]*)/g;
+	        	var decode = function (s) { return decodeURIComponent(s.replace(pl, " ")); };
+	        	var query  = window.location.search.substring(1);
 
-</body>
+	        	urlParams = {};
+	        	while((match = search.exec(query)) !== null)
+	        		urlParams[decode(match[1])] = decode(match[2]);
+	    	}();
+
+		    function seeGetParameters()
+		    {
+		    	alert(JSON.stringify(urlParams, null, 4));
+		    }
+		</script>
+	</head>
+	<body>
+		<p>
+			<button onclick="seeGetParameters()">See Get Parameters</button>
+		</p>
+	</body>
 </html>
