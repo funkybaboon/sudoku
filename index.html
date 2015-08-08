@@ -1,51 +1,84 @@
 <!DOCTYPE HTML>
 <html>
-	<head>
-		<script>
-			var urlParams;
+<head>
+    <script>
+        var urlParams;
 
-			window.onpopstate = function () {
-				var match;
-	        	var pl     = /\+/g;  // Regex for replacing addition symbol with a space
-	        	var search = /([^&=]+)=?([^&]*)/g;
-	        	var decode = function (s) { return decodeURIComponent(s.replace(pl, " ")); };
-	        	var query  = window.location.search.substring(1);
+        function createEmptySudoku() {
+            var sudoku = [[]];
+            for (var x = 1; x <= 9; x++) {
+                sudoku[x] = [];
+            }
+            return sudoku;
+        }
 
-	        	urlParams = {};
-	        	while((match = search.exec(query)) !== null)
-	        		urlParams[decode(match[1])] = decode(match[2]);
-	    	}();
+        var sudoku = createEmptySudoku();
+        sudoku[1][1] = 6;
+        sudoku[4][3] = 8;
+        sudoku[5][2] = 1;
+        sudoku[7][3] = 6;
+        sudoku[9][1] = 7;
 
-		    function seeGetParameters()
-		    {
-		    	alert(JSON.stringify(urlParams, null, 4));
-		    }
+        sudoku[3][5] = 8;
+        sudoku[2][6] = 7;
+        sudoku[4][6] = 1;
+        sudoku[6][4] = 3;
+        sudoku[7][5] = 5;
+        sudoku[8][4] = 4;
 
-			function tableCreate(){
-			    var body = document.body,
-			        tbl  = document.createElement('table');
-			    tbl.style.width  = '100px';
-			    tbl.style.border = '1px solid black';
+        sudoku[1][9] = 1;
+        sudoku[3][7] = 3;
+        sudoku[5][8] = 6;
+        sudoku[6][7] = 1;
+        sudoku[9][9] = 3;
 
-			    for(var i = 0; i <= 9; i++){
-			        var tr = tbl.insertRow();
-			        for(var j = 0; j <= 9; j++){
-		                var td = tr.insertCell();
-		                td.appendChild(document.createTextNode('Cell'));
-		                td.style.border = '1px solid black';
-		            }
-			    body.appendChild(tbl);
-			    }
-			}
 
-		</script>
-	</head>
-	<body>
-		<p>
-			<button onclick="seeGetParameters()">See Get Parameters</button>
-		</p>
-		<p>
-			<button onclick="tableCreate()">Create Table</button>
-		</p>
-	</body>
+        window.onpopstate = function () {
+            var match;
+            var pl = /\+/g;  // Regex for replacing addition symbol with a space
+            var search = /([^&=]+)=?([^&]*)/g;
+            var decode = function (s) {
+                return decodeURIComponent(s.replace(pl, " "));
+            };
+            var query = window.location.search.substring(1);
+
+            urlParams = {};
+            while ((match = search.exec(query)) !== null)
+                urlParams[decode(match[1])] = decode(match[2]);
+        }();
+
+        function seeGetParameters() {
+            alert(JSON.stringify(urlParams, null, 4));
+        }
+
+        function tableCreate() {
+            var body = document.body;
+            var tbl = document.createElement('table');
+            tbl.style.width = '100px';
+            tbl.style.border = '1px solid black';
+
+            for (var x = 1; x <= 9; x++) {
+                var tr = tbl.insertRow();
+                for (var y = 1; y <= 9; y++) {
+                    var td = tr.insertCell();
+
+                    var cellValue = sudoku[x][y] || "";
+
+                    td.appendChild(document.createTextNode(cellValue));
+                    td.style.border = '1px solid black';
+                }
+                body.appendChild(tbl);
+            }
+        }
+
+    </script>
+</head>
+<body>
+<p>
+    <button onclick="seeGetParameters()">See Get Parameters</button>
+</p>
+<p>
+    <button onclick="tableCreate()">Create Table</button>
+</p>
+</body>
 </html>
