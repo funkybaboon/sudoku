@@ -54,24 +54,47 @@
         function tableCreate() {
             var body = document.body;
             var tbl = document.createElement('table');
-            tbl.style.width = '100px';
-            tbl.style.border = '1px solid black';
 
             for (var x = 1; x <= 9; x++) {
                 var tr = tbl.insertRow();
                 for (var y = 1; y <= 9; y++) {
                     var td = tr.insertCell();
 
-                    var cellValue = sudoku[x][y] || "";
+                    var div = td.appendChild(document.createElement('div'))
+                    div.className = 'content';
 
-                    td.appendChild(document.createTextNode(cellValue));
-                    td.style.border = '1px solid black';
+                    var cellValue = sudoku[x][y] || "";
+                    div.appendChild(document.createTextNode(cellValue));
                 }
                 body.appendChild(tbl);
             }
         }
 
     </script>
+    <style>
+        table {
+            width:272px;
+            border:1px solid black;
+        }
+        td {
+            width:10%;
+            position:relative;
+            border:1px solid black;
+        }
+        td:after{
+            content:'';
+            display:block;
+            margin-top:100%;
+        }
+        td .content {
+            position:absolute;
+            top:0;
+            bottom:0;
+            left:0;
+            right:0;
+            <!--background:gold;-->
+        }
+    </style>
 </head>
 <body>
 <p>
