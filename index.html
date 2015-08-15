@@ -94,14 +94,49 @@
             right:0;
             <!--background:gold;-->
         }
+        body {
+            align: center;
+        }
+        .container {
+            margin: 0 auto;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            align-items: center;
+            align-content: space-around;
+
+            height: 93vmin;
+            width: 93vmin;
+            background: lightgrey;
+        }
+        .cell {
+            height: 30vmin;
+            width: 30vmin;
+            background-color:#1E1E1E;
+        }
     </style>
 </head>
 <body>
-<p>
-    <button onclick="seeGetParameters()">See Get Parameters</button>
-</p>
-<p>
-    <button onclick="tableCreate()">Create Table</button>
-</p>
+<div class="container"><!--
+    <p>
+        <button onclick="seeGetParameters()">See Get Parameters</button>
+    </p>
+    <p>
+        <button onclick="tableCreate()">Create Table</button>
+    </p>-->
+
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+
+    <div class="cell"></div>
+    <div class="cell"></div>
+    <div class="cell"></div>
+</div>
 </body>
 </html>
