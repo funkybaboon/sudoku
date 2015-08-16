@@ -52,50 +52,34 @@
         }
 
         function tableCreate() {
-            var body = document.body;
-            var tbl = document.createElement('table');
+            var body = document.getElementsByClassName("frame")[0];
+            //var body = document.body;
+            var containerDiv = body.appendChild(document.createElement('div'))
+            containerDiv.className = 'container';
 
             for (var x = 1; x <= 9; x++) {
-                var tr = tbl.insertRow();
                 for (var y = 1; y <= 9; y++) {
-                    var td = tr.insertCell();
-
-                    var div = td.appendChild(document.createElement('div'))
-                    div.className = 'content';
+                    var div = containerDiv.appendChild(document.createElement('div'))
+                    div.className = 'cell';
 
                     var cellValue = sudoku[x][y] || "";
                     div.appendChild(document.createTextNode(cellValue));
                 }
-                body.appendChild(tbl);
             }
         }
 
     </script>
     <style>
-        table {
-            width:272px;
-            border:1px solid black;
+        .frame {
+            margin: 0 auto;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            align-items: flex-start;
         }
-        td {
-            width:10%;
-            position:relative;
-            border:1px solid black;
-        }
-        td:after{
-            content:'';
-            display:block;
-            margin-top:100%;
-        }
-        td .content {
-            position:absolute;
-            top:0;
-            bottom:0;
-            left:0;
-            right:0;
-            <!--background:gold;-->
-        }
-        body {
-            align: center;
+        .buttons {
+
         }
         .container {
             margin: 0 auto;
@@ -106,37 +90,33 @@
             align-items: center;
             align-content: space-around;
 
-            height: 93vmin;
-            width: 93vmin;
+            height: 96vmin;
+            width: 96vmin;
             background: lightgrey;
         }
         .cell {
-            height: 30vmin;
-            width: 30vmin;
-            background-color:#1E1E1E;
+            height: 10vmin;
+            width: 10vmin;
+            border: 1px solid black;
+
+            color: white;
+            text-align: center;
+            vertical-align: middle;
+            line-height: 10vmin;
+            font-size: 6vmin;
         }
     </style>
 </head>
 <body>
-<div class="container"><!--
-    <p>
-        <button onclick="seeGetParameters()">See Get Parameters</button>
-    </p>
-    <p>
-        <button onclick="tableCreate()">Create Table</button>
-    </p>-->
-
-    <div class="cell"></div>
-    <div class="cell"></div>
-    <div class="cell"></div>
-
-    <div class="cell"></div>
-    <div class="cell"></div>
-    <div class="cell"></div>
-
-    <div class="cell"></div>
-    <div class="cell"></div>
-    <div class="cell"></div>
-</div>
+    <div class="frame">
+        <div class="buttons">
+            <p>
+                <button onclick="seeGetParameters()">See Get Parameters</button>
+            </p>
+            <p>
+                <button onclick="tableCreate()">Create Table</button>
+            </p>
+        </div>
+    </div>
 </body>
 </html>
