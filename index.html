@@ -57,15 +57,37 @@
             var containerDiv = body.appendChild(document.createElement('div'))
             containerDiv.className = 'container';
 
+            function createInnnerCells(parent) {
+                for (var x = 1; x <= 3; x++) {
+                    for (var y = 1; y <= 3; y++) {
+                        var div = parent.appendChild(document.createElement('div'))
+                        div.className = 'cell';
+                        /*
+                         var cellValue = sudoku[x][y] || "";
+                         div.appendChild(document.createTextNode(cellValue));*/
+                    }
+                }
+            }
+
+            for (var x = 1; x <= 3; x++) {
+                for (var y = 1; y <= 3; y++) {
+                    var div = containerDiv.appendChild(document.createElement('div'))
+                    div.className = 'block';
+                    createInnnerCells(div);
+                    /*
+                     var cellValue = sudoku[x][y] || "";
+                     div.appendChild(document.createTextNode(cellValue));*/
+                }
+            }/*
             for (var x = 1; x <= 9; x++) {
                 for (var y = 1; y <= 9; y++) {
                     var div = containerDiv.appendChild(document.createElement('div'))
                     div.className = 'cell';
 
-                    var cellValue = sudoku[x][y] || "";
-                    div.appendChild(document.createTextNode(cellValue));
+                     var cellValue = sudoku[x][y] || "";
+                     div.appendChild(document.createTextNode(cellValue));
                 }
-            }
+            }*/
         }
 
     </script>
@@ -90,13 +112,26 @@
             align-items: center;
             align-content: space-around;
 
-            height: 96vmin;
-            width: 96vmin;
-            background: lightgrey;
+            height: 92vmin;
+            width: 92vmin;
+            background: black;
+        }
+        .block {
+            margin: 0 auto;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            align-items: center;
+            align-content: space-around;
+
+            height: 30vmin;
+            width: 30vmin;
+            background: white;
         }
         .cell {
-            height: 10vmin;
-            width: 10vmin;
+            height: 9vmin;
+            width: 9vmin;
             border: 1px solid black;
 
             color: white;
