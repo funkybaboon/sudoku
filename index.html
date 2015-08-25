@@ -13,24 +13,24 @@
         }
 
         var sudoku = createEmptySudoku();
-        sudoku[1][1] = 6;
-        sudoku[4][3] = 8;
-        sudoku[5][2] = 1;
-        sudoku[7][3] = 6;
-        sudoku[9][1] = 7;
+        sudoku[1][1] = 1;
+        sudoku[9][1] = 3;
+        sudoku[5][2] = 6;
+        sudoku[3][3] = 3;
+        sudoku[6][3] = 1;
 
+        sudoku[2][4] = 7;
+        sudoku[4][4] = 1;
         sudoku[3][5] = 8;
-        sudoku[2][6] = 7;
-        sudoku[4][6] = 1;
-        sudoku[6][4] = 3;
         sudoku[7][5] = 5;
-        sudoku[8][4] = 4;
+        sudoku[6][6] = 3;
+        sudoku[8][6] = 4;
 
-        sudoku[1][9] = 1;
-        sudoku[3][7] = 3;
-        sudoku[5][8] = 6;
-        sudoku[6][7] = 1;
-        sudoku[9][9] = 3;
+        sudoku[4][7] = 8;
+        sudoku[7][7] = 6;
+        sudoku[5][8] = 1;
+        sudoku[1][9] = 6;
+        sudoku[9][9] = 7;
 
 
         window.onpopstate = function () {
@@ -57,37 +57,36 @@
             var containerDiv = body.appendChild(document.createElement('div'))
             containerDiv.className = 'container';
 
-            function createInnnerCells(parent) {
+            var trueX = 1;
+            var trueY = 1;
+
+            function createInnnerCells(parent, xx, yy) {
                 for (var x = 1; x <= 3; x++) {
                     for (var y = 1; y <= 3; y++) {
                         var div = parent.appendChild(document.createElement('div'))
+                        var X = y+yy;
+                        var Y = x+xx;
+
+                        //var cellValue = "("+X+"|"+Y+")";
+                        var cellValue = sudoku[X][Y] || "";
+
                         div.className = 'cell';
-                        /*
-                         var cellValue = sudoku[x][y] || "";
-                         div.appendChild(document.createTextNode(cellValue));*/
+                        div.appendChild(document.createTextNode(cellValue));
                     }
                 }
             }
 
-            for (var x = 1; x <= 3; x++) {
-                for (var y = 1; y <= 3; y++) {
+            for (var x = 0; x <= 6; x+=3) {
+                for (var y = 0; y <= 6; y+=3) {
+                    debugger;
                     var div = containerDiv.appendChild(document.createElement('div'))
                     div.className = 'block';
-                    createInnnerCells(div);
+                    createInnnerCells(div, x, y);
                     /*
                      var cellValue = sudoku[x][y] || "";
                      div.appendChild(document.createTextNode(cellValue));*/
                 }
-            }/*
-            for (var x = 1; x <= 9; x++) {
-                for (var y = 1; y <= 9; y++) {
-                    var div = containerDiv.appendChild(document.createElement('div'))
-                    div.className = 'cell';
-
-                     var cellValue = sudoku[x][y] || "";
-                     div.appendChild(document.createTextNode(cellValue));
-                }
-            }*/
+            }
         }
 
     </script>
@@ -112,8 +111,8 @@
             align-items: center;
             align-content: space-around;
 
-            height: 92vmin;
-            width: 92vmin;
+            height: 91vmin;
+            width: 91vmin;
             background: black;
         }
         .block {
@@ -127,18 +126,19 @@
 
             height: 30vmin;
             width: 30vmin;
-            background: white;
+            background: lightgrey;
         }
         .cell {
-            height: 9vmin;
-            width: 9vmin;
-            border: 1px solid black;
-
-            color: white;
+            color: red;
             text-align: center;
             vertical-align: middle;
             line-height: 10vmin;
-            font-size: 6vmin;
+            font-size: 5vmin;
+
+            height: 9.5vmin;
+            width: 9.5vmin;
+            border: 1px solid black;
+            background: white;
         }
     </style>
 </head>
