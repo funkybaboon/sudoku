@@ -102,14 +102,25 @@
             alert(JSON.stringify(urlParams, null, 4));
         }
 
+        function changeDivValues() {
+            document.getElementById("x1y1").innerHTML = "XXXXX";
+        }
+
+        window.onload = function(){
+            var dialog = document.getElementById('window');
+            document.getElementById('show').onclick = function() {
+                dialog.show();
+            };
+            document.getElementById('exit').onclick = function() {
+                dialog.close();
+            };
+        };
+
         function tableCreate() {
             var body = document.getElementsByClassName("frame")[0];
             //var body = document.body;
             var containerDiv = body.appendChild(document.createElement('div'))
             containerDiv.className = 'container';
-
-            var trueX = 1;
-            var trueY = 1;
 
             function createInnnerCells(parent, xx, yy) {
                 for (var x = 1; x <= 3; x++) {
@@ -123,6 +134,7 @@
 
                         div.style.background = sudoku[X][Y]['background'] || 'white'
                         div.className = 'cell';
+                        div.id = 'x' + [X] + 'y' + [Y];
 
                         div.appendChild(document.createTextNode(cellValue));
                     }
@@ -192,6 +204,13 @@
             border: 1px solid black;
             background: white;
         }
+        dialog {
+            width: 500px;
+            background:#e8e8e8;
+            border: 1px solid #dadada;
+            font-family:sans-serif;
+            padding: 5px 10px 20px 20px;
+        }
     </style>
 </head>
 <body>
@@ -205,5 +224,12 @@
             </p>
         </div>
     </div>
+    <dialog id="window">
+        <h3>Sample Dialog!</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum, inventore!</p>
+        <button id="exit">Close Dialog</button>
+    </dialog>
+    <button id="show">Show Dialog</button>
+
 </body>
 </html>
