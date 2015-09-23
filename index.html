@@ -107,6 +107,8 @@
         }
 
         window.onload = function(){
+            tableCreate();
+
             var dialog = document.getElementById('window');
             document.getElementById('show').onclick = function() {
                 dialog.show();
@@ -114,11 +116,41 @@
             document.getElementById('exit').onclick = function() {
                 dialog.close();
             };
+
+
+            // make inner cells clickable
+            for (var x = 0; x <= 6; x+=3) {
+                for (var y = 0; y <= 6; y+=3) {
+                    createInnnerCells(x,y);
+                }
+            }
+
+            function createInnnerCells(xx, yy) {
+                for (var x = 1; x <= 3; x++) {
+                    for (var y = 1; y <= 3; y++) {
+                        var X = y+yy;
+                        var Y = x+xx;
+                        var id = 'x' + [X] + 'y' + [Y];
+                        document.getElementById(id).onclick = function() {
+                            dialog.show();
+                        };
+                    }
+                }
+            }
+
+            // close popover on click
+            for (var i = 1; i <= 9; i++) {
+                var id = 'z' + i;
+                document.getElementById(id).onclick = function() {
+                    dialog.close();
+                };
+            }
+
+
         };
 
         function tableCreate() {
             var body = document.getElementsByClassName("frame")[0];
-            //var body = document.body;
             var containerDiv = body.appendChild(document.createElement('div'))
             containerDiv.className = 'container';
 
@@ -130,12 +162,19 @@
                         var Y = x+xx;
 
                         //var cellValue = "("+X+"|"+Y+")";
+
                         var cellValue = sudoku[X][Y]['value'] || '';
+
+                        //createInnerButtons(div, cellValue);
 
                         div.style.background = sudoku[X][Y]['background'] || 'white'
                         div.className = 'cell';
                         div.id = 'x' + [X] + 'y' + [Y];
-
+                        /*
+                        div.onclick = function() {
+                            dialog.show();
+                        };
+                        */
                         div.appendChild(document.createTextNode(cellValue));
                     }
                 }
@@ -204,12 +243,45 @@
             border: 1px solid black;
             background: white;
         }
-        dialog {
-            width: 500px;
+        dialog {/*
+            height: 40vmin;
+            width: 40vmin;*/
             background:#e8e8e8;
             border: 1px solid #dadada;
             font-family:sans-serif;
-            padding: 5px 10px 20px 20px;
+
+            position: absolute;
+            left: 0px;
+            top: 0px;
+            z-index: 999;
+
+            padding: 0;
+            border: 0;
+        }
+        .dialogblock {
+            margin: 0 auto;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            align-items: center;
+            align-content: space-around;
+
+            height: 22vmin;
+            width: 22vmin;
+            background: lightgrey;
+        }
+        .dialogcell {
+            color: black;
+            text-align: center;
+            vertical-align: middle;
+            line-height: 7vmin;
+            font-size: 4vmin;
+
+            height: 7vmin;
+            width: 7vmin;
+            border: 1px solid black;
+            background: white;
         }
     </style>
 </head>
@@ -222,14 +294,24 @@
             <p>
                 <button onclick="tableCreate()">Create Table</button>
             </p>
+            <p>
+                <button id="show">Show Dialog</button>
+                <button id="exit">Close Dialog</button>
+            </p>
         </div>
     </div>
     <dialog id="window">
-        <h3>Sample Dialog!</h3>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Earum, inventore!</p>
-        <button id="exit">Close Dialog</button>
+        <div class="dialogblock">
+            <div class="dialogcell" id="z1" style="background: white;">1</div>
+            <div class="dialogcell" id="z2" style="background: white;">2</div>
+            <div class="dialogcell" id="z3" style="background: white;">3</div>
+            <div class="dialogcell" id="z4" style="background: white;">4</div>
+            <div class="dialogcell" id="z5" style="background: white;">5</div>
+            <div class="dialogcell" id="z6" style="background: white;">6</div>
+            <div class="dialogcell" id="z7" style="background: white;">7</div>
+            <div class="dialogcell" id="z8" style="background: white;">8</div>
+            <div class="dialogcell" id="z9" style="background: white;">9</div>
+        </div>
     </dialog>
-    <button id="show">Show Dialog</button>
-
 </body>
 </html>
