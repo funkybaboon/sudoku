@@ -98,19 +98,16 @@
                 urlParams[decode(match[1])] = decode(match[2]);
         }();
 
-        function changeDivValues() {
-            document.getElementById("x1y1").innerHTML = "XXXXX";
-        }
-
-        window.onload = function(){
+        window.onload = function(){/*
             var dialog = document.getElementById('window');
 
+            // add actions to buttons
             document.getElementById('show').onclick = function() {
                 dialog.show();
             };
             document.getElementById('exit').onclick = function() {
                 dialog.close();
-            };
+            };*/
             document.getElementById('tableCreate').onclick = function() {
                 tableCreate();
             };
@@ -118,13 +115,14 @@
                 alert(JSON.stringify(urlParams, null, 4));
             };
 
+            /*
             // close popover on click
             for (var i = 1; i <= 9; i++) {
                 var id = 'z' + i;
                 document.getElementById(id).onclick = function() {
                     dialog.close();
                 };
-            }
+            }*/
 
             // create sudoku
             function tableCreate() {
@@ -132,35 +130,69 @@
                 var containerDiv = body.appendChild(document.createElement('div'))
                 containerDiv.className = 'container';
 
+                // create dialog
+                function createDialog(position){
+                    var dialog = document.createElement('dialog');
+                    dialog.id ='window_'+ position;
+
+                    var dialogblock = dialog.appendChild(document.createElement('div'));
+                    dialogblock.className = 'dialogblock';
+                    for (var z = 1; z <= 9; z++) {
+                        var div = dialogblock.appendChild(document.createElement('div'));
+
+                        div.className = 'dialogcell';
+                        div.id = position + 'z'+ z;
+                        div.appendChild(document.createTextNode(position));
+                    }
+
+                    dialog.onclick = function() {
+                        dialog.close();
+                    };
+
+                    return dialog;
+                }
+
                 // create single cells with numbers
                 function createInnnerCells(parent, xx, yy) {
                     for (var x = 1; x <= 3; x++) {
                         for (var y = 1; y <= 3; y++) {
-                            var div = parent.appendChild(document.createElement('div'))
-                            var X = y+yy;
-                            var Y = x+xx;
+                            var abc = function () {
+                                var div = parent.appendChild(document.createElement('div'))
 
-                            var cellValue = sudoku[X][Y]['value'] || '';
+                                var X = y+yy;
+                                var Y = x+xx;
+                                var id = 'x' + [X] + 'y' + [Y];
 
-                            div.style.background = sudoku[X][Y]['background'] || 'white'
-                            div.className = 'cell';
-                            div.id = 'x' + [X] + 'y' + [Y];
+                                var cellValue = sudoku[X][Y]['value'] || '';
 
-                            div.onclick = function() {
-                                dialog.show();
+                                div.style.background = sudoku[X][Y]['background'] || 'white'
+                                div.className = 'cell';
+                                div.id = id;
+
+                                var popover = createDialog(id);
+
+                                popover.onclick = function() {
+                                    popover.close();
+                                };
+
+                                div.onclick = function() {
+                                    popover.show();
+                                };
+
+                                div.appendChild(popover);
+                                div.appendChild(document.createTextNode(cellValue));
                             };
-
-                            div.appendChild(document.createTextNode(cellValue));
+                            abc();
                         }
                     }
                 }
 
                 // create big cells for 3x3 single cells
-                for (var x = 0; x <= 6; x+=3) {
-                    for (var y = 0; y <= 6; y+=3) {
+                for (var i = 0; i <= 6; i+=3) {
+                    for (var j = 0; j <= 6; j+=3) {
                         var div = containerDiv.appendChild(document.createElement('div'))
                         div.className = 'block';
-                        createInnnerCells(div, x, y);
+                        createInnnerCells(div, i, j);
                     }
                 }
             }
@@ -225,9 +257,9 @@
             border: 1px solid #dadada;
             font-family:sans-serif;
 
-            position: absolute;
-            left: 0px;
-            top: 0px;
+            position: relative;
+            left: -6.25vmin;
+            top: -6.25vmin;
             z-index: 999;
 
             padding: 0;
@@ -251,7 +283,8 @@
             text-align: center;
             vertical-align: middle;
             line-height: 7vmin;
-            font-size: 4vmin;
+            /*font-size: 4vmin;*/
+            font-size: 2vmin;
 
             height: 7vmin;
             width: 7vmin;
@@ -268,13 +301,13 @@
             </p>
             <p>
                 <button id="tableCreate">Create Table</button>
-            </p>
+            </p><!--
             <p>
                 <button id="show">Show Dialog</button>
                 <button id="exit">Close Dialog</button>
-            </p>
+            </p>-->
         </div>
-    </div>
+    </div><!--
     <dialog id="window">
         <div class="dialogblock">
             <div class="dialogcell" id="z1" style="background: white;">1</div>
@@ -287,6 +320,6 @@
             <div class="dialogcell" id="z8" style="background: white;">8</div>
             <div class="dialogcell" id="z9" style="background: white;">9</div>
         </div>
-    </dialog>
+    </dialog>-->
 </body>
 </html>
