@@ -98,31 +98,13 @@
                 urlParams[decode(match[1])] = decode(match[2]);
         }();
 
-        window.onload = function(){/*
-            var dialog = document.getElementById('window');
-
-            // add actions to buttons
-            document.getElementById('show').onclick = function() {
-                dialog.show();
-            };
-            document.getElementById('exit').onclick = function() {
-                dialog.close();
-            };*/
-            document.getElementById('tableCreate').onclick = function() {
+        window.onload = function () {
+            document.getElementById('tableCreate').onclick = function () {
                 tableCreate();
             };
-            document.getElementById('seeGetParameters').onclick = function() {
+            document.getElementById('seeGetParameters').onclick = function () {
                 alert(JSON.stringify(urlParams, null, 4));
             };
-
-            /*
-            // close popover on click
-            for (var i = 1; i <= 9; i++) {
-                var id = 'z' + i;
-                document.getElementById(id).onclick = function() {
-                    dialog.close();
-                };
-            }*/
 
             // create sudoku
             function tableCreate() {
@@ -131,9 +113,9 @@
                 containerDiv.className = 'container';
 
                 // create dialog
-                function createDialog(position){
+                function createDialog(position) {
                     var dialog = document.createElement('dialog');
-                    dialog.id ='window_'+ position;
+                    dialog.id = 'window_' + position;
 
                     var dialogblock = dialog.appendChild(document.createElement('div'));
                     dialogblock.className = 'dialogblock';
@@ -141,11 +123,12 @@
                         var div = dialogblock.appendChild(document.createElement('div'));
 
                         div.className = 'dialogcell';
-                        div.id = position + 'z'+ z;
+                        div.id = position + 'z' + z;
                         div.appendChild(document.createTextNode(position));
                     }
 
-                    dialog.onclick = function() {
+                    dialog.onclick = function (e) {
+                        e.stopPropagation();
                         dialog.close();
                     };
 
@@ -159,8 +142,8 @@
                             var abc = function () {
                                 var div = parent.appendChild(document.createElement('div'))
 
-                                var X = y+yy;
-                                var Y = x+xx;
+                                var X = y + yy;
+                                var Y = x + xx;
                                 var id = 'x' + [X] + 'y' + [Y];
 
                                 var cellValue = sudoku[X][Y]['value'] || '';
@@ -169,17 +152,13 @@
                                 div.className = 'cell';
                                 div.id = id;
 
-                                var popover = createDialog(id);
+                                var popup = createDialog(id);
 
-                                popover.onclick = function() {
-                                    popover.close();
+                                div.onclick = function () {
+                                    popup.show();
                                 };
 
-                                div.onclick = function() {
-                                    popover.show();
-                                };
-
-                                div.appendChild(popover);
+                                div.appendChild(popup);
                                 div.appendChild(document.createTextNode(cellValue));
                             };
                             abc();
@@ -188,8 +167,8 @@
                 }
 
                 // create big cells for 3x3 single cells
-                for (var i = 0; i <= 6; i+=3) {
-                    for (var j = 0; j <= 6; j+=3) {
+                for (var i = 0; i <= 6; i += 3) {
+                    for (var j = 0; j <= 6; j += 3) {
                         var div = containerDiv.appendChild(document.createElement('div'))
                         div.className = 'block';
                         createInnnerCells(div, i, j);
@@ -209,9 +188,7 @@
             justify-content: flex-start;
             align-items: flex-start;
         }
-        .buttons {
 
-        }
         .container {
             margin: 0 auto;
             display: flex;
@@ -225,6 +202,7 @@
             width: 91vmin;
             background: black;
         }
+
         .block {
             margin: 0 auto;
             display: flex;
@@ -238,6 +216,7 @@
             width: 30vmin;
             background: lightgrey;
         }
+
         .cell {
             color: red;
             text-align: center;
@@ -250,12 +229,11 @@
             border: 1px solid black;
             background: white;
         }
-        dialog {/*
-            height: 40vmin;
-            width: 40vmin;*/
-            background:#e8e8e8;
+
+        dialog {
+            background: #e8e8e8;
             border: 1px solid #dadada;
-            font-family:sans-serif;
+            font-family: sans-serif;
 
             position: relative;
             left: -6.25vmin;
@@ -265,6 +243,7 @@
             padding: 0;
             border: 0;
         }
+
         .dialogblock {
             margin: 0 auto;
             display: flex;
@@ -278,6 +257,7 @@
             width: 22vmin;
             background: lightgrey;
         }
+
         .dialogcell {
             color: black;
             text-align: center;
@@ -294,32 +274,15 @@
     </style>
 </head>
 <body>
-    <div class="frame">
-        <div class="buttons">
-            <p>
-                <button id="seeGetParameters">See Get Parameters</button>
-            </p>
-            <p>
-                <button id="tableCreate">Create Table</button>
-            </p><!--
-            <p>
-                <button id="show">Show Dialog</button>
-                <button id="exit">Close Dialog</button>
-            </p>-->
-        </div>
-    </div><!--
-    <dialog id="window">
-        <div class="dialogblock">
-            <div class="dialogcell" id="z1" style="background: white;">1</div>
-            <div class="dialogcell" id="z2" style="background: white;">2</div>
-            <div class="dialogcell" id="z3" style="background: white;">3</div>
-            <div class="dialogcell" id="z4" style="background: white;">4</div>
-            <div class="dialogcell" id="z5" style="background: white;">5</div>
-            <div class="dialogcell" id="z6" style="background: white;">6</div>
-            <div class="dialogcell" id="z7" style="background: white;">7</div>
-            <div class="dialogcell" id="z8" style="background: white;">8</div>
-            <div class="dialogcell" id="z9" style="background: white;">9</div>
-        </div>
-    </dialog>-->
+<div class="frame">
+    <div class="buttons">
+        <p>
+            <button id="seeGetParameters">See Get Parameters</button>
+        </p>
+        <p>
+            <button id="tableCreate">Create Table</button>
+        </p>
+    </div>
+</div>
 </body>
 </html>
