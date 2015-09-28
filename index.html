@@ -112,34 +112,20 @@
                 var containerDiv = body.appendChild(document.createElement('div'))
                 containerDiv.className = 'container';
 
-                // create dialog
-                function createDialog(position) {
-                    var dialog = document.createElement('dialog');
-                    dialog.id = 'window_' + position;
-
-                    var dialogblock = dialog.appendChild(document.createElement('div'));
-                    dialogblock.className = 'dialogblock';
-                    for (var z = 1; z <= 9; z++) {
-                        var div = dialogblock.appendChild(document.createElement('div'));
-
-                        div.className = 'dialogcell';
-                        div.id = position + 'z' + z;
-                        div.appendChild(document.createTextNode(position));
+                // create big cells for 3x3 single cells
+                for (var i = 0; i <= 6; i += 3) {
+                    for (var j = 0; j <= 6; j += 3) {
+                        var div = containerDiv.appendChild(document.createElement('div'))
+                        div.className = 'block';
+                        createInnnerCells(div, i, j);
                     }
-
-                    dialog.onclick = function (e) {
-                        e.stopPropagation();
-                        dialog.close();
-                    };
-
-                    return dialog;
                 }
 
                 // create single cells with numbers
                 function createInnnerCells(parent, xx, yy) {
                     for (var x = 1; x <= 3; x++) {
                         for (var y = 1; y <= 3; y++) {
-                            var abc = function () {
+                            var localScope = function () {
                                 var div = parent.appendChild(document.createElement('div'))
 
                                 var X = y + yy;
@@ -152,7 +138,7 @@
                                 div.className = 'cell';
                                 div.id = id;
 
-                                var popup = createDialog(id);
+                                var popup = createPopup(id);
 
                                 div.onclick = function () {
                                     popup.show();
@@ -161,21 +147,35 @@
                                 div.appendChild(popup);
                                 div.appendChild(document.createTextNode(cellValue));
                             };
-                            abc();
+                            localScope();
                         }
                     }
                 }
 
-                // create big cells for 3x3 single cells
-                for (var i = 0; i <= 6; i += 3) {
-                    for (var j = 0; j <= 6; j += 3) {
-                        var div = containerDiv.appendChild(document.createElement('div'))
-                        div.className = 'block';
-                        createInnnerCells(div, i, j);
+                // create popup
+                function createPopup(position) {
+                    var popup = document.createElement('dialog');
+                    popup.className = 'popup';
+                    popup.id = 'window_' + position;
+
+                    var dialogblock = popup.appendChild(document.createElement('div'));
+                    dialogblock.className = 'popupblock';
+                    for (var z = 1; z <= 9; z++) {
+                        var div = dialogblock.appendChild(document.createElement('div'));
+
+                        div.className = 'popupcell';
+                        div.id = position + 'z' + z;
+                        div.appendChild(document.createTextNode(position));
                     }
+
+                    popup.onclick = function (e) {
+                        e.stopPropagation();
+                        popup.close();
+                    };
+
+                    return popup;
                 }
             }
-
         };
 
     </script>
@@ -244,7 +244,7 @@
             border: 0;
         }
 
-        .dialogblock {
+        .popupblock {
             margin: 0 auto;
             display: flex;
             flex-direction: row;
@@ -258,7 +258,7 @@
             background: lightgrey;
         }
 
-        .dialogcell {
+        .popupcell {
             color: black;
             text-align: center;
             vertical-align: middle;
