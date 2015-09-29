@@ -1,10 +1,7 @@
+/*
 ---
-name: Vanilla JS Sudoku
-description: Sudoku generator and riddle build in plain js
-authors:
-  - John Doe
-resources:
-  - http://some.url.com/some/file.js
-  - http://other.url.com/other_filename.css
+name: Sudoku 
+description: Sudoku generator / riddle built in vanilla Javascript
 normalize_css: no
 ...
+*/
