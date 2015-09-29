@@ -1,6 +1,6 @@
 ---
 name: Vanilla JS Sudoku
-description: Sudoku generator and riddle, build in plan js
+description: Sudoku generator and riddle build in plain js
 authors:
   - John Doe
 resources:
