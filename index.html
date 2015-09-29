@@ -160,18 +160,20 @@
 
                     var dialogblock = popup.appendChild(document.createElement('div'));
                     dialogblock.className = 'popupblock';
-                    for (var z = 1; z <= 9; z++) {
+
+                    for (var z = 1; z <= 9; z++) (function(z){
                         var div = dialogblock.appendChild(document.createElement('div'));
 
                         div.className = 'popupcell';
                         div.id = position + 'z' + z;
-                        div.appendChild(document.createTextNode(position));
-                    }
+                        div.appendChild(document.createTextNode(z));
 
-                    popup.onclick = function (e) {
-                        e.stopPropagation();
-                        popup.close();
-                    };
+                        div.onclick = function (e) {
+                            document.getElementById(position).innerHTML = z;
+                            e.stopPropagation();
+                            popup.close();
+                        };
+                    })(z);
 
                     return popup;
                 }
