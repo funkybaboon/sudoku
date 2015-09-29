@@ -1,10 +1,10 @@
 ---
- name: Vanilla JS Sudoku
- description: Sudoku generator and riddle, build in plan js
- authors:
-   - John Doe
- resources:
-   - http://some.url.com/some/file.js
-   - http://other.url.com/other_filename.css
- normalize_css: no
- ...
+name: Vanilla JS Sudoku
+description: Sudoku generator and riddle, build in plan js
+authors:
+  - John Doe
+resources:
+  - http://some.url.com/some/file.js
+  - http://other.url.com/other_filename.css
+normalize_css: no
+...
