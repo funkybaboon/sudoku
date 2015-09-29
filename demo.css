@@ -1,0 +1,91 @@
+.frame {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.container {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    align-content: space-around;
+
+    height: 91vmin;
+    width: 91vmin;
+    background: black;
+}
+
+.block {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    align-content: space-around;
+
+    height: 30vmin;
+    width: 30vmin;
+    background: lightgrey;
+}
+
+.cell {
+    color: red;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 10vmin;
+    font-size: 5vmin;
+
+    height: 9.5vmin;
+    width: 9.5vmin;
+    border: 1px solid black;
+    background: white;
+}
+
+dialog {
+    background: #e8e8e8;
+    border: 1px solid #dadada;
+    font-family: sans-serif;
+
+    position: relative;
+    left: -6.25vmin;
+    top: -6.25vmin;
+    z-index: 999;
+
+    padding: 0;
+    border: 0;
+}
+
+.popupblock {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    align-content: space-around;
+
+    height: 22vmin;
+    width: 22vmin;
+    background: lightgrey;
+}
+
+.popupcell {
+    color: black;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 7vmin;
+    /*font-size: 4vmin;*/
+    font-size: 2vmin;
+
+    height: 7vmin;
+    width: 7vmin;
+    border: 1px solid black;
+    background: white;
+}
