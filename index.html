@@ -141,7 +141,7 @@
                                 var popup = createPopup(id);
 
                                 div.onclick = function () {
-                                    popup.show();
+                                    popup.style.display = 'block';
                                 };
 
                                 div.appendChild(popup);
@@ -154,7 +154,8 @@
 
                 // create popup
                 function createPopup(position) {
-                    var popup = document.createElement('dialog');
+                    var popup = document.createElement('div');
+                    popup.style.display = 'none';
                     popup.className = 'popup';
                     popup.id = 'window_' + position;
 
@@ -171,7 +172,7 @@
                         div.onclick = function (e) {
                             document.getElementById(position).innerHTML = z;
                             e.stopPropagation();
-                            popup.close();
+                            popup.style.display = 'none';
                         };
                     })(z);
 
@@ -232,7 +233,7 @@
             background: white;
         }
 
-        dialog {
+        .popup {
             background: #e8e8e8;
             border: 1px solid #dadada;
             font-family: sans-serif;
