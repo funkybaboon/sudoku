@@ -137,14 +137,13 @@
                                 div.style.background = sudoku[X][Y]['background'] || 'white'
                                 div.className = 'cell';
                                 div.id = id;
-
-                                var popup = createPopup(id);
-
+                                
                                 div.onclick = function () {
+                                    var popup = createPopup(id);
                                     popup.style.display = 'block';
+                                    div.appendChild(popup);
                                 };
 
-                                div.appendChild(popup);
                                 div.appendChild(document.createTextNode(cellValue));
                             };
                             localScope();
