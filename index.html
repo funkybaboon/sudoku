@@ -4,6 +4,26 @@
     <script>
         var urlParams;
 
+        // remove every occurence of number from array
+        function arrayRemove(number, array){
+            for(var i = array.length - 1; i >= 0; i--) {
+                if(array[i] === number) {
+                    array.splice(i, 1);
+                }
+            }
+        }
+
+        // check if number is in array
+        Array.prototype.contains = function(obj) {
+            var i = this.length;
+            while (i--) {
+                if (this[i] === obj) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         function createEmptySudoku() {
             var sudoku = [];
             for (var x = 1; x <= 9; x++) {
@@ -137,7 +157,7 @@
                                 div.style.background = sudoku[X][Y]['background'] || 'white'
                                 div.className = 'cell';
                                 div.id = id;
-                                
+
                                 div.onclick = function () {
                                     var popup = createPopup(id);
                                     popup.style.display = 'block';
@@ -153,6 +173,7 @@
 
                 // create popup
                 function createPopup(position) {
+                    var possibleNumbers = getPossibleNumbers(position);
                     var popup = document.createElement('div');
                     popup.style.display = 'none';
                     popup.className = 'popup';
@@ -166,16 +187,40 @@
 
                         div.className = 'popupcell';
                         div.id = position + 'z' + z;
-                        div.appendChild(document.createTextNode(z));
 
+                        var numberPossible = possibleNumbers.contains(z);
+
+                        if (numberPossible) {
+                            div.appendChild(document.createTextNode(z));
+                        }
                         div.onclick = function (e) {
-                            document.getElementById(position).innerHTML = z;
+                            if (numberPossible) {
+                                document.getElementById(position).innerHTML = z;
+                            }
                             e.stopPropagation();
                             popup.style.display = 'none';
                         };
                     })(z);
 
                     return popup;
+                }
+
+                // check for numbers that are already there
+                function getPossibleNumbers(position) {
+                    var Possible = [1,2,3,4,5,6,7,8,9];
+
+                    //check row
+                    var row = position.substring(2,4);
+                    for(var x = 1; x <=9; x++) {
+                        var id = 'x' + x + row;
+                        var currentPosition = document.getElementById(id).innerHTML;
+                        currentPosition = parseInt(currentPosition);
+                        if(currentPosition !== "") {
+                            arrayRemove(currentPosition, Possible);
+                        }
+                    };
+
+                    return Possible;
                 }
             }
         };
