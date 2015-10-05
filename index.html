@@ -215,7 +215,7 @@
                         var id = 'x' + x + row;
                         var currentPosition = document.getElementById(id).innerHTML;
                         currentPosition = parseInt(currentPosition);
-                        if(currentPosition !== "") {
+                        if(currentPosition !== "" && id != position) {
                             arrayRemove(currentPosition, Possible);
                         }
                     };
@@ -226,7 +226,7 @@
                         var id = row + 'y' + y;
                         var currentPosition = document.getElementById(id).innerHTML;
                         currentPosition = parseInt(currentPosition);
-                        if(currentPosition !== "") {
+                        if(currentPosition !== "" && id != position) {
                             arrayRemove(currentPosition, Possible);
                         }
                     };
