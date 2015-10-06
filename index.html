@@ -221,16 +221,16 @@
                     };
 
                     //check column
-                    var row = position.substring(0,2);
+                    var column = position.substring(0,2);
                     for(var y = 1; y <=9; y++) {
-                        var id = row + 'y' + y;
+                        var id = column + 'y' + y;
                         var currentPosition = document.getElementById(id).innerHTML;
                         currentPosition = parseInt(currentPosition);
                         if(currentPosition !== "" && id != position) {
                             arrayRemove(currentPosition, Possible);
                         }
                     };
-
+                    
                     return Possible;
                 }
             }
