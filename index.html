@@ -208,11 +208,13 @@
                 // check for numbers that are already there
                 function getPossibleNumbers(position) {
                     var Possible = [1,2,3,4,5,6,7,8,9];
+                    var Y = parseInt(position.substring(3,4));
+                    var X = parseInt(position.substring(1,2));
 
                     //check row
-                    var row = position.substring(2,4);
                     for(var x = 1; x <=9; x++) {
-                        var id = 'x' + x + row;
+                        var id = 'x' + x + 'y' + Y;
+
                         var currentPosition = document.getElementById(id).innerHTML;
                         currentPosition = parseInt(currentPosition);
                         if(currentPosition !== "" && id != position) {
@@ -221,16 +223,43 @@
                     };
 
                     //check column
-                    var column = position.substring(0,2);
                     for(var y = 1; y <=9; y++) {
-                        var id = column + 'y' + y;
+                        var id = 'x' + X + 'y' + y;
                         var currentPosition = document.getElementById(id).innerHTML;
                         currentPosition = parseInt(currentPosition);
                         if(currentPosition !== "" && id != position) {
                             arrayRemove(currentPosition, Possible);
                         }
                     };
-                    
+
+                    //check block. i = x, j = y
+                    for (var i = 0; i <= 6; i += 3) {
+                        for (var j = 0; j <= 6; j += 3) {
+
+                            // check if current position is in the block
+                            if(X >= i+1 && X <= i+3 && Y >= j+1 && Y <= j+3) {
+
+                                // check 9x9 field of block
+                                for (var x = 1; x <= 3; x++) {
+                                    for (var y = 1; y <= 3; y++) {
+                                        var checkX = y + i;
+                                        var checkY = x + j;
+                                        var id = 'x' + checkX + 'y' + checkY;
+                                        //console.log("  ",id);
+                                        //document.getElementById(id).style.background = 'orange';
+
+                                        var currentPosition = document.getElementById(id).innerHTML;
+                                        currentPosition = parseInt(currentPosition);
+                                        if(currentPosition !== "" && id != position) {
+                                            arrayRemove(currentPosition, Possible);
+                                        }
+
+                                    }
+                                }
+                            };
+                        }
+                    }
+
                     return Possible;
                 }
             }
