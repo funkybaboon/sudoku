@@ -7,7 +7,11 @@ describe('vanilla js sudoku', function() {
 
         element(by.id('tableCreate')).click();
 
-        var elements = element.all(protractor.By.css('.block'));
-        expect(elements.count()).toEqual(9);
+        var blocks = element.all(protractor.By.css('.block'));
+        expect(blocks.count()).toEqual(9);
+
+        var cells = element.all(protractor.By.css('.cell'));
+        expect(cells.count()).toEqual(81);
+
     });
 });
