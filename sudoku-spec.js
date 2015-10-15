@@ -28,15 +28,11 @@ describe('vanilla js sudoku', function() {
         expect(element(by.id('x6y6')).getText()).toEqual('3');
         expect(element(by.id('x8y6')).getText()).toEqual('4');
 
-
-        /*
-
-         sudoku[4][7]['value'] = 8;
-         sudoku[7][7]['value'] = 6;
-         sudoku[5][8]['value'] = 1;
-         sudoku[1][9]['value'] = 6;
-         sudoku[9][9]['value'] = 7;
-         */
+        expect(element(by.id('x4y7')).getText()).toEqual('8');
+        expect(element(by.id('x7y7')).getText()).toEqual('6');
+        expect(element(by.id('x5y8')).getText()).toEqual('1');
+        expect(element(by.id('x1y9')).getText()).toEqual('6');
+        expect(element(by.id('x9y9')).getText()).toEqual('7');
 
     });
 
