@@ -1,4 +1,11 @@
 describe('vanilla js sudoku', function() {
+    var checkBackground = function(x,y) {
+        var pos = 'x'+x+'y'+y;
+        expect(element(by.id(pos))
+            .getCssValue('background-color'))
+            .toEqual('rgba(192, 255, 192, 1)');
+    };
+
     it('should open the start sudoku', function() {
 
         browser.ignoreSynchronization = true;
@@ -34,6 +41,50 @@ describe('vanilla js sudoku', function() {
         expect(element(by.id('x1y9')).getText()).toEqual('6');
         expect(element(by.id('x9y9')).getText()).toEqual('7');
 
+        checkBackground(3,1);
+        checkBackground(5,1);
+        checkBackground(6,1);
+        checkBackground(8,1);
+
+        checkBackground(3,2);
+        checkBackground(5,2);
+        checkBackground(6,2);
+        checkBackground(9,2);
+
+        checkBackground(1,3);
+        checkBackground(2,3);
+        checkBackground(8,3);
+        checkBackground(9,3);
+
+        checkBackground(1,4);
+        checkBackground(6,4);
+        checkBackground(7,4);
+        checkBackground(9,4);
+
+        checkBackground(2,5);
+        checkBackground(3,5);
+        checkBackground(4,5);
+        checkBackground(5,5);
+
+        checkBackground(2,6);
+        checkBackground(5,6);
+        checkBackground(7,6);
+        checkBackground(8,6);
+
+        checkBackground(1,7);
+        checkBackground(4,7);
+        checkBackground(7,7);
+        checkBackground(9,7);
+
+        checkBackground(4,8);
+        checkBackground(6,8);
+        checkBackground(7,8);
+        checkBackground(8,8);
+
+        checkBackground(1,9);
+        checkBackground(2,9);
+        checkBackground(3,9);
+        checkBackground(4,9);
     });
 
 });
