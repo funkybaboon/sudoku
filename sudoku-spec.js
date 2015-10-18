@@ -1,9 +1,16 @@
 describe('vanilla js sudoku', function() {
+    // check if background color is green
     var checkBackground = function(x,y) {
         var pos = 'x'+x+'y'+y;
         expect(element(by.id(pos))
             .getCssValue('background-color'))
             .toEqual('rgba(192, 255, 192, 1)');
+    };
+
+    // check value of a sudoku cell
+    var checkValue = function(x,y,expected) {
+        var pos = 'x'+x+'y'+y;
+        expect(element(by.id(pos)).getText()).toEqual(expected.toString());
     };
 
     it('should open the start sudoku', function() {
@@ -22,24 +29,24 @@ describe('vanilla js sudoku', function() {
         var cells = element.all(protractor.By.css('.cell'));
         expect(cells.count()).toEqual(81);
 
-        expect(element(by.id('x1y1')).getText()).toEqual('1');
-        expect(element(by.id('x9y1')).getText()).toEqual('3');
-        expect(element(by.id('x5y2')).getText()).toEqual('6');
-        expect(element(by.id('x3y3')).getText()).toEqual('3');
-        expect(element(by.id('x6y3')).getText()).toEqual('1');
+        checkValue(1,1,1);
+        checkValue(9,1,3);
+        checkValue(5,2,6);
+        checkValue(3,3,3);
+        checkValue(6,3,1);
 
-        expect(element(by.id('x2y4')).getText()).toEqual('7');
-        expect(element(by.id('x4y4')).getText()).toEqual('1');
-        expect(element(by.id('x3y5')).getText()).toEqual('8');
-        expect(element(by.id('x7y5')).getText()).toEqual('5');
-        expect(element(by.id('x6y6')).getText()).toEqual('3');
-        expect(element(by.id('x8y6')).getText()).toEqual('4');
+        checkValue(2,4,7);
+        checkValue(4,4,1);
+        checkValue(3,5,8);
+        checkValue(7,5,5);
+        checkValue(6,6,3);
+        checkValue(8,6,4);
 
-        expect(element(by.id('x4y7')).getText()).toEqual('8');
-        expect(element(by.id('x7y7')).getText()).toEqual('6');
-        expect(element(by.id('x5y8')).getText()).toEqual('1');
-        expect(element(by.id('x1y9')).getText()).toEqual('6');
-        expect(element(by.id('x9y9')).getText()).toEqual('7');
+        checkValue(4,7,8);
+        checkValue(7,7,6);
+        checkValue(5,8,1);
+        checkValue(1,9,6);
+        checkValue(9,9,7);
 
         checkBackground(3,1);
         checkBackground(5,1);
