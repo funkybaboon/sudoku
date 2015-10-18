@@ -21,7 +21,10 @@ describe('vanilla js sudoku', function() {
 
         element(by.id('tableCreate')).click();
 
-        browser.sleep(1000);
+        // wait for sudoku being generated
+        var EC = protractor.ExpectedConditions;
+        var e = element(by.css('.block'));
+        browser.wait(EC.presenceOf(e), 10000);
 
         var blocks = element.all(protractor.By.css('.block'));
         expect(blocks.count()).toEqual(9);
